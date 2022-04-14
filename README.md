@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Dashboard de apresentação de despesas de deputados
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto utiliza a [API da Câmara dos Deputados](https://dadosabertos.camara.leg.br/swagger/api.html) para consultar as despesas de cada deputado.
 
 ## Available Scripts
 
