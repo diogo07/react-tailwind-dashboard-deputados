@@ -6,28 +6,43 @@ import consts from "../consts";
 export default function HomePage() {
 
     const [deputados, setDeputados] = useState([]);
+    const [pages, setPages] = useState([]);
 
     useEffect(() => {
         axios.get(`${consts.API_URL}deputados?ordem=ASC&ordenarPor=nome&idLegislatura=56&itens=20`)
             .then((response) => {
                 if (response.status === 200) {
                     setDeputados(response.data.dados);
+                    setPages(response.data.links);
                 }
             });
     }, []);
 
 
     const search = async (evt) => {
-        if(evt.target.value){
-            axios.get(`${consts.API_URL}deputados?ordem=ASC&ordenarPor=nome&&idLegislatura=56itens=20&nome=${evt.target.value}`)
+        
+        if(evt?.target?.value){
+            axios.get(`${consts.API_URL}deputados?ordem=ASC&ordenarPor=nome&&idLegislatura=56&itens=20&nome=${evt.target.value}`)
             .then((response) => {
                 if (response.status === 200) {
                     setDeputados(response.data.dados);
+                    setPages(response.data.links);
+                }
+            });
+        }
+
+        if (evt?.href.includes('https')){
+            axios.get(evt.href)
+            .then((response) => {
+                if (response.status === 200) {
+                    setDeputados(response.data.dados);
+                    setPages(response.data.links);
                 }
             });
         }
     }
 
+    
     return (
         <div class="min-h-full">
             <nav class="bg-gray-800">
@@ -85,7 +100,7 @@ export default function HomePage() {
                         </ul>
 
                     </div>
-                    <Pagination/>
+                    <Pagination previous={() => search(pages.find((page) => page.rel === 'previous'))} next={() => search(pages.find((page) => page.rel === 'next'))}/>
                 </div>
             </main>
         </div>
