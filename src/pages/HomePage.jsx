@@ -92,7 +92,7 @@ export default function HomePage() {
                                 <li key={deputado.id} className="py-4 flex">
                                     <img className="h-20 w-20 rounded-full" src={deputado.urlFoto} alt="" />
                                     <div className="ml-3">
-                                        <p className="text-sm font-medium text-gray-900">{deputado.nome}</p>
+                                        <a href={`/deputados/${deputado.id}`} className="text-sm font-medium text-gray-900">{deputado.nome}</a>
                                         <p className="text-sm text-gray-500">{deputado.email}</p>
                                     </div>
                                 </li>
