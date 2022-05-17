@@ -22,7 +22,7 @@ export default function HomePage() {
     const search = async (evt) => {
         
         if(evt?.target?.value){
-            axios.get(`${consts.API_URL}deputados?ordem=ASC&ordenarPor=nome&&idLegislatura=56&itens=20&nome=${evt.target.value}`)
+            axios.get(`${consts.API_URL}deputados?ordem=ASC&ordenarPor=nome&idLegislatura=56&itens=20&nome=${evt.target.value}`)
             .then((response) => {
                 if (response.status === 200) {
                     setDeputados(response.data.dados);
